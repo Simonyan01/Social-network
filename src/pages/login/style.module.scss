@@ -1,0 +1,47 @@
+.container {
+  @apply min-h-screen bg-gray-900 flex items-center justify-center p-4;
+
+  .card {
+    @apply max-w-md w-full bg-gray-800 rounded-lg shadow-lg p-6;
+
+    .title {
+      @apply text-3xl font-bold text-white text-center;
+    }
+
+    .subtitle {
+      @apply text-gray-400 text-center mt-2;
+    }
+
+    .form {
+      @apply mt-6;
+
+      .error {
+        @apply bg-red-400 p-2 text-white text-sm rounded-md;
+      }
+
+      .inputGroup {
+        @apply mb-4;
+
+        .label {
+          @apply block text-sm font-medium text-gray-300 mb-1;
+        }
+
+        .input {
+          @apply w-full px-4 py-2 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500;
+        }
+      }
+
+      .button {
+        @apply w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-300;
+      }
+    }
+
+    .footer {
+      @apply mt-4 text-gray-400 text-center;
+
+      .link {
+        @apply text-blue-500 hover:underline;
+      }
+    }
+  }
+}
