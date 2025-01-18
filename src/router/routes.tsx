@@ -1,3 +1,6 @@
+import { Requests } from "@pages/auth/profile/components/Requests"
+import { Followers } from "@pages/auth/account/components/Followers"
+import { Followings } from "@pages/auth/account/components/Followings"
 import { createBrowserRouter } from "react-router-dom"
 import { Settings } from "@pages/auth/settings"
 import { Profile } from "@pages/auth/profile"
@@ -14,6 +17,9 @@ export const routes = createBrowserRouter([
         children: [
             { path: "", element: <Profile /> },
             { path: "settings", element: <Settings /> },
+            { path: "followers", element: <Followers /> },
+            { path: "followings", element: <Followings /> },
+            { path: "requests", element: <Requests /> },
             { path: ":id", element: <Account /> },
         ]
     },

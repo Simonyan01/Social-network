@@ -6,7 +6,7 @@ import { IContext } from "@helpers/types"
 import { Feed } from "./components/Feed"
 
 export const Profile = () => {
-    const { user } = useOutletContext<IContext>()
+    const { user } = useOutletContext<IContext>() || {}
 
     return user && (
         <>

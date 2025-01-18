@@ -69,6 +69,7 @@ export const useHttpMutation = <ReturnType, PayloadType = null>(onSuccess: (() =
   const make = async (url: string, method: METHODS = METHODS.POST, payload?: PayloadType | undefined) => {
     let invocation = null
     setLoading(true)
+    
     try {
       switch (method) {
         case METHODS.GET:

@@ -88,7 +88,6 @@ export const ProfileHeader = () => {
                                 Cancel
                             </button>
                         </div>
-
                     </div>
                 )}
             </div>

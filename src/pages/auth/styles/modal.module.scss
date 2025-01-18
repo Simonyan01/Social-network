@@ -1,0 +1,27 @@
+.modalContainer {
+  @apply bg-gray-800 bg-opacity-60 w-full h-full flex items-center justify-center;
+
+  .modal {
+    @apply bg-blue-50 p-6 rounded-lg shadow-lg text-center max-w-md mx-auto transition-all ease-in-out duration-300 transform scale-95;
+
+    .modalHeader {
+      @apply text-2xl font-bold mb-4 text-gray-800;
+    }
+
+    .modalBody {
+      @apply mb-4 text-gray-600 text-sm sm:text-base;
+    }
+
+    .modalActions {
+      @apply mt-5 flex justify-center space-x-4;
+
+      .confirmButton {
+        @apply bg-green-600 text-white py-2 px-6 tracking-wider rounded-md cursor-pointer hover:bg-red-700 transition-all focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50;
+      }
+
+      .cancelButton {
+        @apply bg-red-600 text-white py-2 px-6 tracking-wider rounded-md cursor-pointer hover:bg-gray-700 transition-all focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50;
+      }
+    }
+  }
+}

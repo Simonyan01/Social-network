@@ -1,6 +1,8 @@
 import { METHODS, useHttpMutation, useHttpQuery } from '@hooks/useHttp'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
+import mainStyles from '@pages/auth/styles/main.module.scss'
 import styles from '@pages/auth/styles/layout.module.scss'
+import { ClipLoader } from 'react-spinners'
 import { IResponse } from '@helpers/types'
 
 const links = [
@@ -8,7 +10,7 @@ const links = [
     { name: 'Settings', href: '/profile/settings' },
     { name: 'Followers', href: '/profile/followers' },
     { name: 'Followings', href: '/profile/followings' },
-    { name: 'Messages', href: '/profile/messages' }
+    { name: 'Messages', href: '/profile/requests' }
 ]
 
 export const Layout = () => {
@@ -18,7 +20,17 @@ export const Layout = () => {
 
     const Logout = () => logout("/logout", METHODS.POST)
 
-    if (loading) return <p>Loading...</p>
+    if (loading) {
+        return (
+            <section className={mainStyles.loading}>
+                <ClipLoader
+                    size={50}
+                    color="#3498db"
+                    loading={loading}
+                />
+            </section>
+        )
+    }
 
     return (
         <section className={styles.layout}>

@@ -6,12 +6,11 @@ import { AccountContext } from "./context"
 
 export const Account = () => {
     const { id } = useParams()
-    const { data, loading, error, refetch } = useHttpQuery<IResponse>(`/account/${id}`)
+    const { data, error, refetch } = useHttpQuery<IResponse>(`/account/${id}`)
 
-    if (loading) return <p>Loading...</p>
     if (error) return <Navigate to="/profile" />
 
-    const account: IAccount | null = data.payload ? data.payload as IAccount : null
+    const account: IAccount | null = data?.payload ? data?.payload as IAccount : null
 
     return (
         account && (

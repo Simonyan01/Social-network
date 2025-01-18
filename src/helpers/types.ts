@@ -11,13 +11,21 @@ export interface IUser {
 }
 
 export interface IAccount extends IUser {
-  posts: unknown
+  posts: IPost[]
   isPrivate: number
   connection: {
     followsMe: boolean
     following: boolean
     requested: boolean
   }
+}
+
+export interface IRequest {
+  id: string
+  username: string
+  userId: number
+  picture: string
+  createdAt: string
 }
 
 export interface IUpdateLogin {
@@ -39,9 +47,11 @@ export interface IResponse {
 }
 
 export interface IPost {
-  id: number
+  id: string
   picture: string
   title: string
+  isLiked: boolean
+  likes: IUser[]
 }
 
 export interface IContext {
@@ -55,3 +65,19 @@ export interface IAccountContext {
 }
 
 export type IAuth = Pick<IUser, "login" | "password">
+
+export type PostProps = {
+  post: IPost
+  onLike: (id: string) => void
+  refetch: () => void
+}
+
+export type ModalProps = {
+  isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
+  onDelete: () => void
+}
+
+export type UserPosts = Partial<{
+  userPosts: IPost[]
+}>
