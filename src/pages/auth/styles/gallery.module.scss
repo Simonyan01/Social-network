@@ -23,7 +23,7 @@
         }
 
         .likeButton {
-          @apply flex items-center m-auto px-1 py-1 gap-3 text-sm rounded-md shadow-md outline-none focus:outline-none;
+          @apply flex items-center px-1 pt-1 gap-3 rounded-md shadow-md outline-none focus:outline-none;
 
           .likesCount {
             @apply text-xl text-gray-300 font-semibold;

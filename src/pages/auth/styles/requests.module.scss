@@ -1,0 +1,27 @@
+.requests {
+  @apply p-4 bg-gray-600 rounded-lg tracking-wide shadow-md;
+}
+
+.requests h1 {
+  @apply text-2xl font-semibold text-slate-300 mb-3;
+}
+
+.request {
+  @apply flex items-center justify-between p-4 mb-4 text-slate-300 rounded-lg shadow-sm;
+}
+
+.userInfo p {
+  @apply text-lg font-medium text-gray-700;
+}
+
+.actions {
+  @apply flex gap-2;
+}
+
+.acceptButton {
+  @apply px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors;
+}
+
+.declineButton {
+  @apply px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors;
+}

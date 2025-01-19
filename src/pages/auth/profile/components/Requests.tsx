@@ -1,19 +1,19 @@
 import { useHttpQuery, useHttpMutation, METHODS } from "@hooks/useHttp"
 import styles from "@pages/auth/styles/requests.module.scss"
-import { IResponse, IRequest } from "@helpers/types"
+import { IResponse, IUser } from "@helpers/types"
 
 export const Requests = () => {
     const { data, refetch } = useHttpQuery<IResponse>("/requests")
-    const [handleRequestAction] = useHttpMutation(refetch)
+    const [handleRequest] = useHttpMutation(refetch)
 
-    const requests: IRequest[] | null = data?.payload ? data?.payload as IRequest[] : null
+    const requests: IUser[] | null = data?.payload ? data?.payload as IUser[] : null
 
     const handleAccept = (id: string) => {
-        handleRequestAction(`/requests/accept/${id}`, METHODS.PATCH)
+        handleRequest(`/requests/accept/${id}`, METHODS.PATCH)
     }
 
     const handleDecline = (id: string) => {
-        handleRequestAction(`/requests/decline/${id}`, METHODS.PATCH)
+        handleRequest(`/requests/decline/${id}`, METHODS.PATCH)
     }
 
     return (
@@ -21,16 +21,24 @@ export const Requests = () => {
             <h1>Requests</h1>
             {requests && requests.length > 0 ? (
                 <ul>
-                    {requests.map((request) => (
-                        <li key={request.id} className={styles.request}>
+                    {requests.map(({ id, name }) => (
+                        <li key={id} className={styles.request}>
                             <div className={styles.userInfo}>
-                                <p>{request.username}</p>
+                                <p>{name}</p>
                             </div>
                             <div className={styles.actions}>
-                                <button onClick={() => handleAccept(request.id)} className={styles.acceptButton}>
+                                <button
+                                    type="button"
+                                    onClick={() => handleAccept(id)}
+                                    className={styles.acceptButton}
+                                >
                                     Accept
                                 </button>
-                                <button onClick={() => handleDecline(request.id)} className={styles.declineButton}>
+                                <button
+                                    type="button"
+                                    onClick={() => handleDecline(id)}
+                                    className={styles.declineButton}
+                                >
                                     Decline
                                 </button>
                             </div>

@@ -1,6 +1,7 @@
-import { IContext, IResponse } from "@helpers/types"
+import { IContext, IPost, IResponse } from "@helpers/types"
 import { useOutletContext } from "react-router-dom"
 import { BASE_URL } from "@helpers/constants"
+import { useHttpQuery } from "@hooks/useHttp"
 import { useRef, useState } from "react"
 import { Http } from "@helpers/api"
 
@@ -8,7 +9,9 @@ export const ProfileHeader = () => {
     const [preview, setPreview] = useState<string>("")
     const { user, refetch } = useOutletContext<IContext>()
     const { name, surname, picture, followers, following } = user || {}
+    const { data } = useHttpQuery<IResponse>("/posts")
 
+    const posts: IPost[] = data?.payload as IPost[] ?? []
     const photo = useRef<HTMLInputElement | null>(null)
     const uploadedPhoto = photo.current?.files?.[0]
 
@@ -38,6 +41,12 @@ export const ProfileHeader = () => {
                 console.error("Upload failed:", error)
             })
     }
+
+    const Statistics = [
+        { label: "Followers", count: followers?.length },
+        { label: "Following", count: following?.length },
+        { label: "Posts", count: posts.length }
+    ]
 
     return (
         <section className="bg-gray-900 text-slate-300 flex flex-col items-start p-7 rounded-lg shadow-lg">
@@ -92,16 +101,10 @@ export const ProfileHeader = () => {
                 )}
             </div>
             <div className="flex gap-8">
-                {["Followers", "Following", "Posts"].map((item, idx) => (
-                    <div key={idx} className="flex flex-col items-center hover:text-blue-500 transition">
-                        <p className="text-lg font-bold text-blue-400">
-                            {item === "Followers"
-                                ? followers?.length || 0
-                                : item === "Following"
-                                    ? following?.length || 0
-                                    : 0}
-                        </p>
-                        <p className="text-gray-400 text-sm tracking-wide">{item}</p>
+                {Statistics.map(({ label, count }) => (
+                    <div key={label} className="flex flex-col items-center hover:text-blue-500 transition">
+                        <p className="text-lg font-bold text-blue-400">{count}</p>
+                        <p className="text-gray-400 text-sm tracking-wide">{label}</p>
                     </div>
                 ))}
             </div>

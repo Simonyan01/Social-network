@@ -4,7 +4,9 @@ import Modal from "react-modal"
 
 Modal.setAppElement("#root")
 
-export const DeleteModal: React.FC<ModalProps> = ({ isOpen, setIsOpen, onDelete }) => {
+export const DeleteModal: React.FC<ModalProps> = ({ post, isOpen, setIsOpen, onDelete }) => {
+    const { id } = post
+    
     return (
         <Modal
             isOpen={isOpen}
@@ -17,7 +19,7 @@ export const DeleteModal: React.FC<ModalProps> = ({ isOpen, setIsOpen, onDelete 
                 <div className={styles.modalActions}>
                     <button
                         type="button"
-                        onClick={onDelete}
+                        onClick={() => onDelete(id)}
                         className={styles.confirmButton}
                     >
                         Yes
@@ -31,6 +33,6 @@ export const DeleteModal: React.FC<ModalProps> = ({ isOpen, setIsOpen, onDelete 
                     </button>
                 </div>
             </div>
-        </Modal>
+        </Modal >
     )
 }

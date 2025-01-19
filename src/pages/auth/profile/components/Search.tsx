@@ -48,11 +48,7 @@ export const Search = () => {
                                 className="flex items-center p-4 bg-gray-700 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
                             >
                                 <img
-                                    src={
-                                        picture
-                                            ? BASE_URL + picture
-                                            : "https://cdn0.iconfinder.com/data/icons/business-and-management-flat-8/24/PROFILE_profile_picture_profile_icon_user_profile-512.png"
-                                    }
+                                    src={picture ? `${BASE_URL}${picture}` : "https://cdn0.iconfinder.com/data/icons/seo-web-4-1/128/Vigor_User-Avatar-Profile-Photo-01-512.png"}
                                     alt={name}
                                     className="w-14 h-14 rounded-full object-cover border border-gray-500"
                                 />

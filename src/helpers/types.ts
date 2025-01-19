@@ -1,5 +1,5 @@
 export interface IUser {
-  id: number
+  id: string
   name: string
   surname: string
   login: string
@@ -20,13 +20,6 @@ export interface IAccount extends IUser {
   }
 }
 
-export interface IRequest {
-  id: string
-  username: string
-  userId: number
-  picture: string
-  createdAt: string
-}
 
 export interface IUpdateLogin {
   login: string
@@ -43,15 +36,16 @@ export interface IResponse {
   message: string
   payload: unknown
   user?: IUser
-  post?: IPost[]
+  post?: IPost
 }
 
 export interface IPost {
   id: string
-  picture: string
+  userId: string
   title: string
-  isLiked: boolean
+  picture: string
   likes: IUser[]
+  isLiked: boolean
 }
 
 export interface IContext {
@@ -70,14 +64,17 @@ export type PostProps = {
   post: IPost
   onLike: (id: string) => void
   refetch: () => void
+  account: IAccount | undefined
 }
 
 export type ModalProps = {
+  post: IPost
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void
-  onDelete: () => void
+  onDelete: (id: string) => void
 }
 
 export type UserPosts = Partial<{
   userPosts: IPost[]
+  account: IAccount
 }>

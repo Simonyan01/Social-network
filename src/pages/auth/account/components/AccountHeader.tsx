@@ -12,44 +12,42 @@ export const AccountHeader = () => {
         throw new Error(account ? "Out of provider..." : "Account is null...")
     }
 
-    const { name, surname, picture, isPrivate, followers, following, posts } = account
+    const { name, surname, picture, isPrivate, followers = [], following = [], posts = [] } = account
+
+    const Statistics = [
+        { label: "Followers", count: followers.length },
+        { label: "Following", count: following.length },
+        { label: "Posts", count: posts.length }
+    ]
 
     return (
         <>
             <header className="flex flex-col items-center text-center">
-                {picture && (
-                    <img
-                        className="w-44 h-44 rounded-full object-cover border-4 border-solid border-indigo-500"
-                        src={`${BASE_URL}${picture}`}
-                        alt={`${name} ${surname}'s profile picture`}
-                    />
-                )}
+                <img
+                    className="w-44 h-44 rounded-full object-cover border-4 border-solid border-indigo-500"
+                    src={picture ? `${BASE_URL}${picture}` : "https://cdn0.iconfinder.com/data/icons/seo-web-4-1/128/Vigor_User-Avatar-Profile-Photo-01-512.png"}
+                    alt={`${name} ${surname}'s profile picture`}
+                />
                 <h1 className="text-2xl font-bold mt-4 flex items-center gap-2">
                     {name} {surname}{" "}
                     {isPrivate ? (
-                        <FaLock className="text-gray-500" title="Private Account" />
+                        <FaLock className="text-gray-500" />
                     ) : (
-                        <FaLockOpen className="text-green-500" title="Public Account" />
+                        <FaLockOpen className="text-green-500" />
                     )}
                 </h1>
                 <ActionButton />
                 <div className="mt-6 grid grid-cols-3 gap-4 text-center">
-                    <div>
-                        <p className="text-lg font-semibold">{followers.length}</p>
-                        <p className="text-gray-600">Followers</p>
-                    </div>
-                    <div>
-                        <p className="text-lg font-semibold">{following.length}</p>
-                        <p className="text-gray-600">Following</p>
-                    </div>
-                    <div>
-                        <p className="text-lg font-semibold">{posts.length}</p>
-                        <p className="text-gray-600">Posts</p>
-                    </div>
+                    {Statistics.map(({ label, count }) => (
+                        <div key={label}>
+                            <p className="text-lg font-semibold">{count}</p>
+                            <p className="text-gray-600">{label}</p>
+                        </div>
+                    ))}
                 </div>
             </header>
             <section className="mt-8 w-full">
-                <Gallery userPosts={posts} />
+                <Gallery userPosts={posts} account={account} />
             </section>
         </>
     )

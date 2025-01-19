@@ -5,17 +5,16 @@ import styles from "@pages/auth/styles/gallery.module.scss"
 import { ClipLoader } from "react-spinners"
 import { Post } from "./Post"
 
-export const Gallery: React.FC<UserPosts> = ({ userPosts }) => {
+export const Gallery: React.FC<UserPosts> = ({ userPosts, account }) => {
     const { data, loading, refetch } = useHttpQuery<IResponse>("/posts")
-    const [likeUser] = useHttpMutation<IResponse, IPost[]>(() => console.log("Liked"))
+    const [likeUser] = useHttpMutation<IResponse, IPost[]>(refetch)
 
     const posts: IPost[] = data?.payload as IPost[] ?? []
     const allPosts = userPosts?.length || userPosts?.length === 0 ? userPosts : posts
     const hasPosts = allPosts.length > 0
 
-    const handleLike = (id: string) => {
+    const handleLikeRequest = (id: string) => {
         likeUser(`/posts/react/${id}`, METHODS.POST)
-        refetch()
     }
 
     if (loading) {
@@ -35,8 +34,9 @@ export const Gallery: React.FC<UserPosts> = ({ userPosts }) => {
                         <Post
                             key={post.id}
                             post={post}
-                            onLike={handleLike}
+                            onLike={handleLikeRequest}
                             refetch={refetch}
+                            account={account}
                         />
                     ))}
                 </div>
