@@ -14,7 +14,7 @@ export const AccountHeader = () => {
 
     const { name, surname, picture, isPrivate, followers = [], following = [], posts = [] } = account
 
-    const Statistics = [
+    const statistics = [
         { label: "Followers", count: followers.length },
         { label: "Following", count: following.length },
         { label: "Posts", count: posts.length }
@@ -38,7 +38,7 @@ export const AccountHeader = () => {
                 </h1>
                 <ActionButton />
                 <div className="mt-6 grid grid-cols-3 gap-4 text-center">
-                    {Statistics.map(({ label, count }) => (
+                    {statistics.map(({ label, count }) => (
                         <div key={label}>
                             <p className="text-lg font-semibold">{count}</p>
                             <p className="text-gray-600">{label}</p>

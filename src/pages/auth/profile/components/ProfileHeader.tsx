@@ -42,7 +42,7 @@ export const ProfileHeader = () => {
             })
     }
 
-    const Statistics = [
+    const statistics = [
         { label: "Followers", count: followers?.length },
         { label: "Following", count: following?.length },
         { label: "Posts", count: posts.length }
@@ -101,7 +101,7 @@ export const ProfileHeader = () => {
                 )}
             </div>
             <div className="flex gap-8">
-                {Statistics.map(({ label, count }) => (
+                {statistics.map(({ label, count }) => (
                     <div key={label} className="flex flex-col items-center hover:text-blue-500 transition">
                         <p className="text-lg font-bold text-blue-400">{count}</p>
                         <p className="text-gray-400 text-sm tracking-wide">{label}</p>
